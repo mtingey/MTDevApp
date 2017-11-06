@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ListingsService } from '../../services/listings/listings.service';
+import { Listing } from '../../models/listing';
 
 @Component({
   selector: 'app-listings',
@@ -8,16 +9,21 @@ import { ListingsService } from '../../services/listings/listings.service';
 })
 
 export class ListingsComponent implements OnInit {
+  // public queryString: string = 'albert%20lee%20hh';
+  public listings: Listing[] = [];
+  // public queriedListings = this.queryString ? this.queryString : this.listings;
 
   constructor(
-    listingService: ListingsService
+    private listingService: ListingsService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.listingService.getListings()
+      .subscribe(listings => {
+        this.listings = listings;
+        // this.queriedListings = this.listings;
+      });
   }
 
-  public getListings(): void {
-    
-  }
 
 }

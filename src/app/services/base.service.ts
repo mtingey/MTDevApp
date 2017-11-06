@@ -6,10 +6,10 @@ import { Response, URLSearchParams } from '@angular/http';
 
 @Injectable()
 export class BaseService {
-    public extractData(res: Response): any {
+    public extractData(res): any {
         let body: Object;
-        if (res.text()) {
-            body = res.json();
+        if (res.listings) {
+            body = res.listings;
         }
         return body || {};
     }

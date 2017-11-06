@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ListingsComponent } from './components/listings/listings.component';
+import { ListingsService } from './services/listings/listings.service';
+// import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -10,9 +13,10 @@ import { ListingsComponent } from './components/listings/listings.component';
     ListingsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ListingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
