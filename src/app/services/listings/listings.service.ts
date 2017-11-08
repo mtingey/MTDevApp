@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { Http, RequestOptions, Headers,  } from '@angular/http';
 import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Listing } from '../../models/listing';
@@ -13,18 +12,17 @@ import 'rxjs/add/operator/switchMap';
 @Injectable()
 
 export class ListingsService extends BaseService {
-  // public listingsUrl: string = `${environment.baseUrl}/listings`;
-  public listingsUrl: string = `${environment.baseUrl}/listings?query=albert%20lee%20hh`;
+  public listingsUrl: string = `${environment.baseUrl}/listings`;
   private authToken = new HttpHeaders().set('Authorization', 'ea7adc907c971e8f277ad6841dc5331fcb3ae567fe25aef1c51f4eb0c1be2681');
   private options = {};
-  // private queryString = '?query=albert%20lee%20hh';
 
   constructor(private http: HttpClient) {
     super();
   }
 
-  public getListings(): Observable<Listing[]> {
-    // this.options['params'] = new HttpParams().set('Accept-Version', '3.0').append('Content-Type', 'application/json');
+  public getListings(searchString): Observable<Listing[]> {
+    this.listingsUrl = this.listingsUrl.concat('?query=', searchString);
+    console.log(this.listingsUrl);
     this.options['headers'] = new HttpHeaders()
                                   .set('Accept-Version', '3.0')
                                   .append('Content-Type', 'application/json')
@@ -32,6 +30,11 @@ export class ListingsService extends BaseService {
     return this.http.get(this.listingsUrl, this.options)
       .map(super.extractData)
       .catch(super.handleError);
+
+  }
+
+  resetListingsUrl() {
+    this.listingsUrl = `${environment.baseUrl}/listings`;
   }
 
 }

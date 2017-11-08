@@ -1,3 +1,31 @@
-<p *ngFor="let listing of listings">
+<div>
+  Search:
+  <input (keyup)="onKey($event)"/>
+  <button (click)="onSearchClick()">Search</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Make</th>
+      <th>Model</th>
+      <th>Year</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let listing of listings">
+      <td>{{listing.id | json}}</td>
+      <td>{{listing.make | json}}</td>
+      <td>{{listing.model | json}}</td>
+      <td>{{listing.year | json}}</td>
+      <td>{{listing.state.slug | json}}</td>
+      <!-- <td>{{listing.make | json}}</td> -->
+    </tr>
+  </tbody>
+</table>
+
+<!-- <p *ngFor="let listing of listings">
   {{listing.make | json}}
-</p>
+</p> -->
